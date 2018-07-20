@@ -14,22 +14,23 @@ $(function () {
                 clicksCount: 0,
                 imgUrl: "img/cat2.jpg"
             }, {
-            name: "cat1",
+                name: "cat3",
                 clicksCount: 0,
                 imgUrl: "img/cat3.jpg"
-        }],
-        currentCat : model.cats[0]
+            }
+        ],
+        currentCat: null
     };
 
     var controller = {
         init: function () {
-            model.init();
+            model.currentCat = model.cats[0];
             view_list.init();
             view_cats.init();
         },
         getAllCats: function () {
             var catNames = [];
-            for(var i = 0; i <= model.cats.length; i++){
+            for (var i = 0; i < model.cats.length; i++) {
                 catNames.push(model.cats[i].name);
             }
             return catNames;
@@ -66,7 +67,7 @@ $(function () {
                 catNames = this.catNames;
 
             var htmlstr = '';
-            for(var i = 0; i <= catNames.length; i++ ){
+            for (var i = 0; i < catNames.length; i++) {
                 htmlstr += "<li>" + catNames[i] + "</li>";
             }
             catList.html(htmlstr);
