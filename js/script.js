@@ -62,5 +62,22 @@ $(function () {
             catList.html(htmlstr);
         }
     };
+    var view_cats = {
+        init: function () {
+            this.cats = $(".cats");
+            this.cats.on("click", "img", function () {
+                var catId = $(this).siblings("#name").text()[3];
+                controller.incrementClicks(catId-1);
+            });
 
+            view_cats.render();
+        },
+        render: function () {
+            var currentCat = controller.getCurrentCat();
+            $("#name").text(currentCat.name);
+            $("#clicksCount").text(currentCat.clicksCount);
+            $("#imgUrl").attr("src",currentCat.imgUrl);
+        }
+    };
+    controller.init();
 });
