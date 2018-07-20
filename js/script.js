@@ -4,29 +4,30 @@
 $(function () {
 
     var model = {
-        cats : [{
+        cats: [
+            {
+                name: "cat1",
+                clicksCount: 0,
+                imgUrl: "img/cat1.jpg"
+            }, {
+                name: "cat2",
+                clicksCount: 0,
+                imgUrl: "img/cat2.jpg"
+            }, {
             name: "cat1",
-            clicksCount: 0,
-            imgUrl: "img/cat1.jpg"
-        }, {
-            name: "cat2",
-            clicksCount: 0,
-            imgUrl: "img/cat2.jpg"
-        }, {
-            name: "cat1",
-            clicksCount: 0,
-            imgUrl: "img/cat3.jpg"
+                clicksCount: 0,
+                imgUrl: "img/cat3.jpg"
         }],
         currentCat : model.cats[0]
     };
 
     var controller = {
-        init : function () {
+        init: function () {
             model.init();
             view_list.init();
             view_cats.init();
         },
-        getAllcats : function () {
+        getAllCats : function () {
             var catNames = [];
             for(var i = 0; i <= model.cats.length; i++){
                 catNames.push(model.cats[i].name);
@@ -34,10 +35,10 @@ $(function () {
             return catNames;
 
         },
-        getCurrentCat : function () {
+        getCurrentCat: function () {
             return model.currentCat;
         },
-        changeCurrentCat : function (catId) {
+        changeCurrentCat: function (catId) {
             model.currentCat = model.cats[catId];
             view_cats.render();
         }
@@ -46,12 +47,17 @@ $(function () {
     };
 
     var view_list = {
-        init : function () {
+        init: function () {
             this.catList = $(".cat_list");
-            this.catNames = controller.getAllcats();
-            view_list.render();
+            this.catList.on("click","li",function () {
+                var catId = $(this).text()[3];
+                controller.changeCurrentCat(catId-1);
+            });
+
+            this.catNames = controller.getAllCats();
+            this.render();
         },
-        render : function () {
+        render: function () {
             var catList = this.catList,
                 catNames = this.catNames;
 
