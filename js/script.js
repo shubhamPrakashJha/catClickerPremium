@@ -20,14 +20,35 @@ $(function () {
         currentCat : model.cats[0]
     };
 
+    var controller = {
+        init : function () {
+            model.init();
+            view_list.init();
+            view_cats.init();
+        },
+        getAllcats : function () {
+            var catNames = [];
+            for(var i = 0; i <= model.cats.length; i++){
+                catNames.push(model.cats[i].name);
+            }
+            return catNames;
+
+        },
+        getCurrentCat : function () {
+            return model.currentCat;
+        },
+        changeCurrentCat : function (catId) {
+            model.currentCat = model.cats[catId];
+            view_cats.render();
+        }
+
+
+    };
+
     var view_list = {
         init : function () {
             this.catList = $(".cat_list");
-            this.catNames = [];
-            for(var i = 0; i <= model.cats.length; i++){
-                var name = model.cats[i].name;
-                catNames.push(name);
-            }
+            this.catNames = controller.getAllcats();
             view_list.render();
         },
         render : function () {
