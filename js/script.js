@@ -3,7 +3,7 @@
  */
 $(function () {
 
-    var model = {
+    model = {
         cats: [
             {
                 name: "cat1",
@@ -27,7 +27,7 @@ $(function () {
             view_list.init();
             view_cats.init();
         },
-        getAllCats : function () {
+        getAllCats: function () {
             var catNames = [];
             for(var i = 0; i <= model.cats.length; i++){
                 catNames.push(model.cats[i].name);
@@ -40,6 +40,10 @@ $(function () {
         },
         changeCurrentCat: function (catId) {
             model.currentCat = model.cats[catId];
+            view_cats.render();
+        },
+        incrementClicks : function (catId) {
+            model.cats[catId].clicksCount++;
             view_cats.render();
         }
 
@@ -63,7 +67,7 @@ $(function () {
 
             var htmlstr = '';
             for(var i = 0; i <= catNames.length; i++ ){
-                htmlstr += "<li>"+catNames[i]+"</li>";
+                htmlstr += "<li>" + catNames[i] + "</li>";
             }
             catList.html(htmlstr);
         }
