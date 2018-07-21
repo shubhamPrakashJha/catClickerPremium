@@ -39,12 +39,12 @@ $(function () {
         getCurrentCat: function () {
             return model.currentCat;
         },
-        changeCurrentCat: function (catId) {
+        setCurrentCat: function (catId) {
             model.currentCat = model.cats[catId];
             view_cats.render();
         },
-        incrementClicks : function (catId) {
-            model.cats[catId].clicksCount++;
+        incrementClicks : function () {
+            model.currentCat.clicksCount++;
             view_cats.render();
         }
 
@@ -56,7 +56,7 @@ $(function () {
             this.catList = $(".cat_list");
             this.catList.on("click","li",function () {
                 var catId = $(this).text()[3];
-                controller.changeCurrentCat(catId-1);
+                controller.setCurrentCat(catId-1);
             });
 
             this.catNames = controller.getAllCats();
@@ -77,8 +77,7 @@ $(function () {
         init: function () {
             this.cats = $(".cats");
             this.cats.on("click", "img", function () {
-                var catId = $(this).siblings("#name").text()[3];
-                controller.incrementClicks(catId-1);
+                controller.incrementClicks();
             });
 
             view_cats.render();
