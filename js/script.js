@@ -3,7 +3,7 @@
  */
 $(function () {
 
-    model = {
+    var model = {
         cats: [
             {
                 name: "cat1",
@@ -89,5 +89,7 @@ $(function () {
             $("#imgUrl").attr("src",currentCat.imgUrl);
         }
     };
+
+
     controller.init();
 });
