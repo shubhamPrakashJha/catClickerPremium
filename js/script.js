@@ -55,8 +55,8 @@ $(function () {
         init: function () {
             this.catList = $(".cat_list");
             this.catList.on("click","li",function () {
-                var catId = $(this).text()[3];
-                controller.setCurrentCat(catId-1);
+                var catId = $(this).index();
+                controller.setCurrentCat(catId);
             });
 
             this.catNames = controller.getAllCats();
