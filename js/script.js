@@ -109,6 +109,9 @@ $(function () {
             $("#admin").click(function () {
                 controller.openAdminView();
             });
+            $("#cancel").click(function () {
+                controller.closeAdminView();
+            })
         },
         render : function () {
 
