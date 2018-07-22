@@ -50,6 +50,10 @@ $(function () {
             view_cats.render();
         },
         openAdminView: function () {
+            var cat = model.currentCat;
+            $("#newName").attr("value",cat.name);
+            $("#newImgUrl").attr("value",cat.imgUrl);
+            $("#newClicksCount").attr("value",cat.clicksCount);
             $("#changeInfoForm").show();
             model.hiddenStatus = false;
         },
@@ -105,7 +109,6 @@ $(function () {
             $("#admin").click(function () {
                 controller.openAdminView();
             });
-
         },
         render : function () {
 
