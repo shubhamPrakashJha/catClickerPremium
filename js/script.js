@@ -51,15 +51,37 @@ $(function () {
         },
         openAdminView: function () {
             var cat = model.currentCat;
-            $("#newName").attr("value",cat.name);
-            $("#newImgUrl").attr("value",cat.imgUrl);
-            $("#newClicksCount").attr("value",cat.clicksCount);
+            this.$newName = $("#newName");
+            this.$newImgUrl = $("#newImgUrl");
+            this.$newClicksCount = $("#newClicksCount");
+            this.$newName.attr("placeholder",cat.name);
+            this.$newImgUrl.attr("placeholder",cat.imgUrl);
+            this.$newClicksCount.attr("placeholder",cat.clicksCount);
             $("#changeInfoForm").show();
             model.hiddenStatus = false;
         },
         closeAdminView: function () {
             $("#changeInfoForm").hide();
             model.hiddenStatus = true
+        },
+        updateValue: function () {
+            var currentCat = this.getCurrentCat();
+            var newName = this.$newName;
+            var newImgUrl = this.$newImgUrl;
+            var newClicksCount = this.$newClicksCount;
+            if(newName.val()){
+                currentCat.name = newName.val();
+                newName.val("");
+            }else if(newImgUrl.val()){
+                currentCat.imgUrl = newImgUrl.val();
+                newImgUrl.val("");
+            }else if(newClicksCount.val()){
+                currentCat.clicksCount = newClicksCount.val();
+                newClicksCount.val("")
+            }
+            view_list.render();
+            view_cats.render();
+            view_admin.render();
         }
 
     };
@@ -72,12 +94,11 @@ $(function () {
                 controller.setCurrentCat(catId);
             });
 
-            this.catNames = controller.getAllCats();
             this.render();
         },
         render: function () {
             var catList = this.catList,
-                catNames = this.catNames;
+                catNames = controller.getAllCats();
 
             var htmlstr = '';
             for (var i = 0; i < catNames.length; i++) {
@@ -97,6 +118,7 @@ $(function () {
         },
         render: function () {
             var currentCat = controller.getCurrentCat();
+            controller.closeAdminView();
             $("#name").text(currentCat.name);
             $("#clicksCount").text(currentCat.clicksCount);
             $("#imgUrl").attr("src",currentCat.imgUrl);
@@ -107,14 +129,18 @@ $(function () {
         init : function () {
             controller.closeAdminView();
             $("#admin").click(function () {
-                controller.openAdminView();
+                view_admin.render();
             });
             $("#cancel").click(function () {
+                controller.closeAdminView();
+            });
+            $("#submit").click(function () {
+                controller.updateValue();
                 controller.closeAdminView();
             })
         },
         render : function () {
-
+            controller.openAdminView();
         }
     };
 
