@@ -27,6 +27,7 @@ $(function () {
             model.currentCat = model.cats[0];
             view_list.init();
             view_cats.init();
+            view_admin.init();
         },
         getAllCats: function () {
             var catNames = [];
@@ -87,6 +88,18 @@ $(function () {
             $("#name").text(currentCat.name);
             $("#clicksCount").text(currentCat.clicksCount);
             $("#imgUrl").attr("src",currentCat.imgUrl);
+        }
+    };
+
+    var view_admin = {
+        init : function () {
+            $("#changeInfoForm").hide();
+            $("#admin").click(function () {
+                $("#changeInfoForm").toggle();
+            })
+        },
+        render : function () {
+
         }
     };
 
