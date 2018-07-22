@@ -19,7 +19,8 @@ $(function () {
                 imgUrl: "img/cat3.jpg"
             }
         ],
-        currentCat: null
+        currentCat: null,
+        hiddenStatus: null
     };
 
     var controller = {
@@ -47,8 +48,15 @@ $(function () {
         incrementClicks : function () {
             model.currentCat.clicksCount++;
             view_cats.render();
+        },
+        openAdminView: function () {
+            $("#changeInfoForm").show();
+            model.hiddenStatus = false;
+        },
+        closeAdminView: function () {
+            $("#changeInfoForm").hide();
+            model.hiddenStatus = true
         }
-
 
     };
 
@@ -93,10 +101,11 @@ $(function () {
 
     var view_admin = {
         init : function () {
-            $("#changeInfoForm").hide();
+            controller.closeAdminView();
             $("#admin").click(function () {
-                $("#changeInfoForm").toggle();
-            })
+                controller.openAdminView();
+            });
+
         },
         render : function () {
 
