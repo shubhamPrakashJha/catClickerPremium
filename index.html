@@ -23,7 +23,25 @@
         <span id="clicksCount"></span>
     </p>
     <img id="imgUrl" src="" alt="cat image">
-
+    <br><br>
+    <button id="admin">Admin</button>
+    <br><br>
+    <form id="changeInfoForm">
+        <fieldset>
+            <legend>Edit information</legend>
+            <label for="newName">Name :</label><br>
+            <input id="newName" type="text" name="newName">
+            <br>
+            <label for="newImgUrl">Image URL :</label><br>
+            <input id="newImgUrl" type="text" name="newImgUrl">
+            <br>
+            <label for="newClicks">Clicks :</label><br>
+            <input id="newClicks" type="text" name="newClicks">
+            <br><br>
+            <input id="cancel" type="button" value="Cancel">
+            <input id="submit" type="submit">
+        </fieldset>
+    </form>
 </div>
 <script type="application/javascript" src="js/libs/jquery.min.js"></script>
 <script type="application/javascript" src="js/script.js"></script>
