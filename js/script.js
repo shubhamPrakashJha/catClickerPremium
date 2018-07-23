@@ -20,7 +20,7 @@ $(function () {
             }
         ],
         currentCat: null,
-        hiddenStatus: null
+        adminVisible: null
     };
 
     var controller = {
@@ -58,11 +58,11 @@ $(function () {
             this.$newImgUrl.attr("placeholder",cat.imgUrl);
             this.$newClicksCount.attr("placeholder",cat.clicksCount);
             $("#changeInfoForm").show();
-            model.hiddenStatus = false;
+            model.adminVisible = true;
         },
         closeAdminView: function () {
             $("#changeInfoForm").hide();
-            model.hiddenStatus = true
+            model.adminVisible = false;
         },
         updateValue: function () {
             var currentCat = this.getCurrentCat();
@@ -127,7 +127,6 @@ $(function () {
 
     var view_admin = {
         init : function () {
-            controller.closeAdminView();
             $("#admin").click(function () {
                 view_admin.render();
             });
@@ -140,7 +139,11 @@ $(function () {
             })
         },
         render : function () {
-            controller.openAdminView();
+            if(!model.adminVisible){
+                controller.openAdminView();
+            }else {
+                controller.closeAdminView();
+            }
         }
     };
 
